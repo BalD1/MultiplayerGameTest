@@ -58,6 +58,7 @@ public class PlayerNetwork : NetworkBehaviour
 
         string playerName = GameManager.Instance.PickedPlayerName.selectedPlayerName;
 
+        playerName ??= "";
         if (playerName.Equals("")) playerName = "Player " + playerCount;
 
         _name.text = playerName;

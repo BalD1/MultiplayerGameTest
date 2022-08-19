@@ -41,8 +41,6 @@ public class ColorPlayer : MonoBehaviour
             {
                 if (loadedColors[i] != null)
                 {
-                    Debug.Log(ColorUtility.TryParseHtmlString(loadedColors[i], out c));
-                    Debug.Log(playerPartName[i]);
                     ColorUtility.TryParseHtmlString(loadedColors[i], out c);
                     playerPart[i].color = c;
                 }
