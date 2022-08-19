@@ -554,12 +554,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 3879707852286679234}
   controller: {fileID: 3879707852286679235}
+  eyeL: {fileID: 3879707852238191451}
+  eyeR: {fileID: 3879707850570867297}
   head: {fileID: 3879707852205942267}
   body: {fileID: 3879707851620878894}
   groundCheck: {fileID: 3879707850926707881}
   groundMask:
     serializedVersion: 2
     m_Bits: 384
+  playerName: 
+  network: {fileID: -4904656888495800097}
   speed: 10
   jumpHeight: 2.5
   mouseSensitivity: 300
@@ -626,12 +630,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9637e9d1476719409e3d05268cb1164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relatedPlayer: {fileID: 3879707852286679232}
   _cheapInterpolationValue: 0.1
   _serverAuth: 0
   _body: {fileID: 3879707852286679234}
   _head: {fileID: 3879707852205942264}
   _bodyRenderer: {fileID: 3879707851620878893}
   _headRenderer: {fileID: 3879707852205942262}
+  _eyeLRenderer: {fileID: 3879707852238191446}
+  _eyeRRenderer: {fileID: 3879707850570867324}
   _HUD: {fileID: 7898277398665460734}
   _name: {fileID: 7129311865211372534}
   _camera: {fileID: 1309978378914122905}
@@ -641,6 +648,7 @@ MonoBehaviour:
   - {fileID: 1309978378914122906}
   ownerComponentsToDisable:
   - {fileID: 7129311865211372534}
+  forceInit: 0
 --- !u!1 &5924674676043529470
 GameObject:
   m_ObjectHideFlags: 0

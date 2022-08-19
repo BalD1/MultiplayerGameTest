@@ -9,12 +9,36 @@ public class Player : Entity
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private CharacterController controller;
 
+    [SerializeField] private GameObject eyeL;
+    [SerializeField] private GameObject eyeR;
+
     [SerializeField] private GameObject head;
     [SerializeField] private GameObject body;
 
     [SerializeField] private Transform groundCheck;
 
     [SerializeField] private LayerMask groundMask;
+
+    [SerializeField] private string playerName;
+    public string PlayerName { get => playerName; set => playerName = value; }
+
+    [SerializeField] private PlayerNetwork network;
+
+    public bool IsInit { get; private set; }
+
+    [Header("Colors")]
+
+    public Dictionary<PlayerColorableParts, Color> playerColor;
+
+    [System.Serializable]
+    public enum PlayerColorableParts
+    {
+        EyeL,
+        EyeR,
+        Head,
+        Body
+    }
+
 
     [Header("Stats")]
 
@@ -36,6 +60,11 @@ public class Player : Entity
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        UpdateColors();
+
+
+        IsInit = true;
+        network.InitiatePlayer();
     }
 
     private void Update()
@@ -43,6 +72,43 @@ public class Player : Entity
         CharacterMovements();
         CameraUpdate();
         JumpBehaviour();
+    }
+
+    public void UpdateColors()
+    {
+        if (playerColor != null)
+            return;
+
+        ColorPlayer colors = GameManager.Instance.PickedPlayerColors;
+        if (colors == null || colors.PlayerParts == null)
+            return;
+
+        playerColor ??= new Dictionary<PlayerColorableParts, Color>();
+
+        for (int i = 0; i < colors.PlayerParts.Count; i++)
+        {
+            Color c = colors.PlayerParts[i].color;
+            playerColor.Add(colors.PlayerPartName[i], c);
+
+            switch (colors.PlayerPartName[i])
+            {
+                case PlayerColorableParts.EyeL:
+                    eyeL.GetComponent<MeshRenderer>().material.color = c;
+                    break;
+
+                case PlayerColorableParts.EyeR:
+                    eyeR.GetComponent<MeshRenderer>().material.color = c;
+                    break;
+
+                case PlayerColorableParts.Head:
+                    head.GetComponent<MeshRenderer>().material.color = c;
+                    break;
+
+                case PlayerColorableParts.Body:
+                    body.GetComponent<MeshRenderer>().material.color = c;
+                    break;
+            }
+        }
     }
 
     private void CameraUpdate()
