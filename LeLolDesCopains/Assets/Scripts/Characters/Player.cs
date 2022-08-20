@@ -22,7 +22,6 @@ public class Player : Entity
     [SerializeField] private string playerName;
     public string PlayerName { get => playerName; set => playerName = value; }
 
-    [SerializeField] private PlayerNetwork network;
 
     public bool IsInit { get; private set; }
 
@@ -64,7 +63,6 @@ public class Player : Entity
 
 
         IsInit = true;
-        network.InitiatePlayer();
     }
 
     private void Update()
