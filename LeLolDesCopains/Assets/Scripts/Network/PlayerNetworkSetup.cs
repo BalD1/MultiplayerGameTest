@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class PlayerNetworkSetup : NetworkBehaviour
+public class PlayerNetworkSetup : MonoBehaviour
 {
     [SerializeField] private Behaviour[] componentsToDisable;
     [SerializeField] private Renderers playerRenderers;
@@ -20,8 +19,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
     private void Start()
     {
         // Disable the components in array if this is not the local player, or hide self
-        if (!this.isLocalPlayer) foreach (var component in componentsToDisable) { component.enabled = false; }
-        else InitiateLocalPlayer();
+        // if (!this.isLocalPlayer) foreach (var component in componentsToDisable) { component.enabled = false; }
+        // else InitiateLocalPlayer();
     }
 
     private void InitiateLocalPlayer()
