@@ -13,11 +13,11 @@ public class PlayerName : MonoBehaviour
     private void Start()
     {
         string loadedName = SaveLoadManager.Instance.LoadName();
-        if (loadedName != null)
-        {
-            selectedPlayerName = loadedName;
-            inputField.text = loadedName;
-        }
+        if (loadedName.Equals("") || loadedName == null) loadedName = "NoName";
+
+        selectedPlayerName = loadedName;
+        inputField.text = loadedName;
+
     }
 
     public void OnNameChange(string newName)

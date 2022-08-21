@@ -8,14 +8,14 @@ public class ColorPlayer : MonoBehaviour
     [SerializeField] private FlexibleColorPicker fcp;
 
     [SerializeField] private List<Image> playerPart;
-    [SerializeField] private List<Player.PlayerColorableParts> playerPartName;
+    [SerializeField] private List<PlayerCharacter.PlayerColorableParts> playerPartName;
     // 0 = eye L
     // 1 = eye R
     // 2 = head
     // 3 = body
 
     public List<Image> PlayerParts { get => playerPart; }
-    public List<Player.PlayerColorableParts> PlayerPartName { get => playerPartName; }
+    public List<PlayerCharacter.PlayerColorableParts> PlayerPartName { get => playerPartName; }
 
     private int currentIndex;
 

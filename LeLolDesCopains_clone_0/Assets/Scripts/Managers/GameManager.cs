@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerName pickedPlayerName;
     public PlayerName PickedPlayerName { get => pickedPlayerName; }
 
+    [SerializeField] private LobbyManager lobbyManager;
+    public LobbyManager LobbyManagerRef { get => lobbyManager; }
+
     private static GameManager Create()
     {
         GameObject gameManager = new GameObject();
