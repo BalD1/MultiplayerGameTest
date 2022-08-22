@@ -11,9 +11,22 @@ public class PlayerItem : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI playerName;
 
-    public void SetPlayerName(string _nickName)
+    public Player itemRef;
+
+    public bool IsSet { get; private set; }
+
+    public void SetPlayerName(Player _player)
     {
-        playerName.text = _nickName;
+        itemRef = _player;
+        playerName.text = _player.NickName;
+        IsSet = true;
+    }
+
+    public void ResetField()
+    {
+        itemRef = null;
+        playerName.text = "Waiting For Player...";
+        IsSet = false;
     }
 
 }

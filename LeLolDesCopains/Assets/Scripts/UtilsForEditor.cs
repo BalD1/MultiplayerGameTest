@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class UtilsForEditor : MonoBehaviour
 {
-    [HideInInspector] public GameObject firstMenu;
-    [HideInInspector] public GameObject connectionMenu;
-    [HideInInspector] public GameObject playButtons;
-    [HideInInspector] public GameObject lobbyPanel;
-    [HideInInspector] public GameObject roomPanel;
+#if UNITY_EDITOR
 
-    public enum MainMenuState
+    [System.Serializable]
+    public struct MenusItems
     {
-        FirstMenuBase,
-        InLobby,
-        InRoom
+        public GameObject menuObject;
+        public bool isActive;
+        public string label;
     }
 
-    [HideInInspector] public MainMenuState mainMenuState;
+    [HideInInspector] public MenusItems[] menusItems;
+#endif
 }
