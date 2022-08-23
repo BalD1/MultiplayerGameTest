@@ -393,6 +393,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 2023150937571026006}
+  playerPart:
+  - {fileID: 8571595875247030427}
+  - {fileID: 3411355451254006318}
+  - {fileID: 1747203251014556679}
+  - {fileID: 2646924749892380705}
+  playerPartName: 00000000010000000200000003000000
 --- !u!222 &5212015263074622351
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -540,7 +546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.032757673, y: 0.83310616}
   m_AnchorMax: {x: 0.97, y: 0.9795264}
-  m_AnchoredPosition: {x: -0.39631653, y: 0.025375366}
+  m_AnchoredPosition: {x: -0.39630127, y: 0.025268555}
   m_SizeDelta: {x: -1.4706466, y: 0.4963228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7452283184534898978

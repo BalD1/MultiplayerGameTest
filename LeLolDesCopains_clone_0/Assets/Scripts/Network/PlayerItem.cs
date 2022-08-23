@@ -11,6 +11,10 @@ public class PlayerItem : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI playerName;
 
+
+    [SerializeField] private List<Image> playerPart;
+    [SerializeField] private List<PlayerCharacter.PlayerColorableParts> playerPartName;
+
     public Player itemRef;
 
     public bool IsSet { get; private set; }
@@ -20,6 +24,15 @@ public class PlayerItem : MonoBehaviour
         itemRef = _player;
         playerName.text = _player.NickName;
         IsSet = true;
+    }
+
+    public void SetPlayerColor(Color _color, PlayerCharacter.PlayerColorableParts part)
+    {
+        for (int i = 0; i < playerPartName.Count; i++)
+        {
+            if (playerPartName[i].Equals(part))
+                playerPart[i].color = _color;
+        }
     }
 
     public void ResetField()

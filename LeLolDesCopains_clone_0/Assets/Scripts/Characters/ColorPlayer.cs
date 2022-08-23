@@ -7,6 +7,8 @@ public class ColorPlayer : MonoBehaviour
 {
     [SerializeField] private FlexibleColorPicker fcp;
 
+    [SerializeField] private Dropdown dropdown;
+
     [SerializeField] private List<Image> playerPart;
     [SerializeField] private List<PlayerCharacter.PlayerColorableParts> playerPartName;
     // 0 = eye L
@@ -21,8 +23,6 @@ public class ColorPlayer : MonoBehaviour
 
     private void Start()
     {
-        Dropdown dropdown = this.transform.GetComponent<Dropdown>();
-
         playerPart ??= new List<Image>();
 
         dropdown.options.Clear();

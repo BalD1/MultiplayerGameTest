@@ -10,6 +10,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject connectButton;
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject lobbyPanel;
+    [SerializeField] private Button settingsButton;
     [SerializeField] private TextMeshProUGUI connectButtonText;
 
     [SerializeField] private string connectText = "Connecting";
@@ -19,11 +20,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public void OnClickConnect()
     {
-        string playerName = GameManager.Instance.PickedPlayerName.selectedPlayerName;
-
-        PhotonNetwork.NickName = playerName;
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.ConnectUsingSettings();
+        UpdateProprieties();
 
         connectButtonText.text = connectText;
 
@@ -52,7 +49,34 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         connectButton.SetActive(false);
         playButton.SetActive(true);
         lobbyPanel.SetActive(true);
+        settingsButton.interactable = true;
 
         playButton.GetComponent<Button>().onClick.Invoke();
+    }
+
+    public void UpdateProprieties()
+    {
+        string playerName = GameManager.Instance.PickedPlayerName.selectedPlayerName;
+        ExitGames.Client.Photon.Hashtable proprieties = new ExitGames.Client.Photon.Hashtable();
+
+        List<Color> colorsList = new List<Color>();
+        ColorPlayer colorPlayer = GameManager.Instance.PickedPlayerColors;
+
+        foreach (Image img in colorPlayer.PlayerParts)
+        {
+            colorsList.Add(img.color);
+        }
+
+        proprieties.Add("EyeL", "#" + ColorUtility.ToHtmlStringRGBA(colorsList[0]));
+        proprieties.Add("EyeR", "#" + ColorUtility.ToHtmlStringRGBA(colorsList[1]));
+        proprieties.Add("Head", "#" + ColorUtility.ToHtmlStringRGBA(colorsList[2]));
+        proprieties.Add("Body", "#" + ColorUtility.ToHtmlStringRGBA(colorsList[3]));
+
+        PhotonNetwork.NickName = playerName;
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.SetPlayerCustomProperties(proprieties);
+
+        if (!PhotonNetwork.IsConnected)
+            PhotonNetwork.ConnectUsingSettings();
     }
 }

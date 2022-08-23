@@ -262,6 +262,36 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (nickName == null || nickName.Equals("")) nickName = "Unnamed";
         _playerItem.SetPlayerName(_player);
 
+        Color c = Color.white;
+
+        foreach (var item in _player.CustomProperties)
+        {
+            ColorUtility.TryParseHtmlString((string)item.Value, out c);
+            switch (item.Key)
+            {
+                case "EyeL":
+                    _playerItem.SetPlayerColor(c, PlayerCharacter.PlayerColorableParts.EyeL);
+                    break;
+
+                case "EyeR":
+                    _playerItem.SetPlayerColor(c, PlayerCharacter.PlayerColorableParts.EyeR);
+                    break;
+
+                case "Head":
+                    _playerItem.SetPlayerColor(c, PlayerCharacter.PlayerColorableParts.Head);
+                    break;
+
+                case "Body":
+                    _playerItem.SetPlayerColor(c, PlayerCharacter.PlayerColorableParts.Body);
+                    break;
+
+                default:
+                    Debug.LogError(item.Key + " was not found in switch statement.");
+                    break;
+            }
+        }
+
+
     }
 
     /// <summary> <para>
