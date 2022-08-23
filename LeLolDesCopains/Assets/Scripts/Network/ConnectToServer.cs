@@ -22,6 +22,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         string playerName = GameManager.Instance.PickedPlayerName.selectedPlayerName;
 
         PhotonNetwork.NickName = playerName;
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
 
         connectButtonText.text = connectText;

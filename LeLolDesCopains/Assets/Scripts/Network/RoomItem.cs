@@ -48,7 +48,7 @@ public class RoomItem : MonoBehaviour
         HasPassword = true;
         Password = _password;
 
-        lockImage.enabled = HasPassword;
+        lockImage.gameObject.SetActive(HasPassword);
     }
 
     public void OnClickItem()

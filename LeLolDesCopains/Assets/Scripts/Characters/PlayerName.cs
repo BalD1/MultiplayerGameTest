@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+#if UNITY_EDITOR
+using ParrelSync;
+#endif
+
+
 public class PlayerName : MonoBehaviour
 {
     [SerializeField] private TMP_InputField inputField;
@@ -15,6 +21,9 @@ public class PlayerName : MonoBehaviour
         string loadedName = SaveLoadManager.Instance.LoadName();
         if (loadedName.Equals("") || loadedName == null) loadedName = "NoName";
 
+#if UNITY_EDITOR
+        loadedName = ClonesManager.IsClone() ? ClonesManager.GetArgument() : loadedName;
+#endif
         selectedPlayerName = loadedName;
         inputField.text = loadedName;
 
