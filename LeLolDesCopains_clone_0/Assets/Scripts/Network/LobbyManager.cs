@@ -7,15 +7,6 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-
-/*
- * 
- * 
- *      TODO :  Add search room
- * 
- * 
- */
-
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TMP_InputField roomNameInput;
@@ -323,6 +314,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // Repopulate it
         foreach (RoomInfo room in RoomInfoList)
         {
+            if (room == null)
+                continue;
+
             RoomItem newRoom = Instantiate(PF_roomItem, contentObject);
 
             string password = "";

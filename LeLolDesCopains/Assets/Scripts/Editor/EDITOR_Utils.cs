@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(UtilsForEditor))]
 public class EDITOR_Utils : Editor
@@ -17,7 +18,8 @@ public class EDITOR_Utils : Editor
     {
         base.OnInspectorGUI();
 
-        DrawMainMenuUtils();
+        if (SceneManager.GetActiveScene().name.Equals("MainMenu"))
+            DrawMainMenuUtils();
     }
 
     private void DrawMainMenuUtils()

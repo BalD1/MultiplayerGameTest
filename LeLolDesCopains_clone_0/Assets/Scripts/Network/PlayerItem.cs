@@ -11,6 +11,8 @@ public class PlayerItem : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI playerName;
 
+    [SerializeField] private ReadyButton readyButton;
+    public ReadyButton ReadyButton { get => readyButton; }
 
     [SerializeField] private List<Image> playerPart;
     [SerializeField] private List<PlayerCharacter.PlayerColorableParts> playerPartName;
@@ -21,6 +23,8 @@ public class PlayerItem : MonoBehaviour
 
     public void SetPlayerName(Player _player)
     {
+        readyButton.SetToggle(_player);
+
         itemRef = _player;
         playerName.text = _player.NickName;
         IsSet = true;
@@ -40,6 +44,12 @@ public class PlayerItem : MonoBehaviour
         itemRef = null;
         playerName.text = "Waiting For Player...";
         IsSet = false;
+    }
+
+    private void Update()
+    {
+        if (itemRef != null)
+            Debug.Log(itemRef.NickName);
     }
 
 }
