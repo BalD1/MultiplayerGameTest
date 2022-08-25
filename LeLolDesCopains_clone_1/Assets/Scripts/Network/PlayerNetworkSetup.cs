@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
 
-public class PlayerNetworkSetup : MonoBehaviour
+public class PlayerNetworkSetup : MonoBehaviour, IPunObservable
 {
     [SerializeField] private Behaviour[] otherComponentsToDisable;
     [SerializeField] private Behaviour[] selfComponentsToDisable;
     [SerializeField] private Renderers playerRenderers;
     [SerializeField] private PhotonView view;
+
+    [SerializeField] private TextMeshProUGUI hudName;
 
     [System.Serializable]
     public struct Renderers
@@ -21,6 +25,13 @@ public class PlayerNetworkSetup : MonoBehaviour
 
     private void Start()
     {
+        PlayerManager.Instance.playersByNetworks.Add(
+            new PlayerManager.PlayerByNetwork
+            {
+                playerObject = this.gameObject,
+                playerNetwork = this.view.Owner
+            });
+
         if (!view.IsMine)
             InitiateOtherPlayer();
         else
@@ -41,7 +52,56 @@ public class PlayerNetworkSetup : MonoBehaviour
 
     private void InitiateOtherPlayer()
     {
+        hudName.text = view.Owner.NickName;
+
+        SetPlayerColors();
+
         foreach (Behaviour item in otherComponentsToDisable)
             item.enabled = false;
+    }
+
+    private void SetPlayerColors()
+    {
+        Player _player = view.Owner;
+        Color c = Color.white;
+
+        foreach (var item in _player.CustomProperties)
+        {
+            ColorUtility.TryParseHtmlString((string)item.Value, out c);
+            switch (item.Key)
+            {
+                case "EyeL":
+                    playerRenderers.eyeL_Renderer.material.color = c;
+                    break;
+
+                case "EyeR":
+                    playerRenderers.eyeR_Renderer.material.color = c;
+                    break;
+
+                case "Head":
+                    playerRenderers.head_Renderer.material.color = c;
+                    break;
+
+                case "Body":
+                    playerRenderers.body_Renderer.material.color = c;
+                    break;
+
+                default:
+                    Debug.LogError(item.Key + " was not found in switch statement.");
+                    break;
+            }
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)   // if is owner
+        {
+
+        }
+        else if (stream.IsReading)  // if is client
+        {
+
+        }
     }
 }
