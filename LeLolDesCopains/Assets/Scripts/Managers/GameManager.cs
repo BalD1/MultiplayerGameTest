@@ -5,16 +5,17 @@ using Unity.Netcode;
 
 public class GameManager : MonoBehaviour
 {
+    /*
+     * 
+     * TODO : régler bug instantiation
+     * 
+     */
     private static GameManager instance;
     public static GameManager Instance
     {
         get
         {
-            if (!instance)
-            {
-                Debug.LogError("GameManager Instance was not found, force creation");
-                Create();
-            }
+            if (!instance) Debug.LogError("GameManager Instance was not found, force creation");
 
             return instance;
         }
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LobbyManager lobbyManager;
     public LobbyManager LobbyManagerRef { get => lobbyManager; }
 
+    public Camera mainCamera;
+
     private static GameManager Create()
     {
         GameObject gameManager = new GameObject();
@@ -86,6 +89,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance ??= this;
+        if (instance == null) instance = this;
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1309978378914122906}
   m_Layer: 6
   m_Name: PlayerCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 3879707852286679235}
   - component: {fileID: 3879707852286679234}
   - component: {fileID: 8249518799143010569}
+  - component: {fileID: 3030820069542484579}
   - component: {fileID: -3105620587026806276}
   m_Layer: 6
   m_Name: Player
@@ -562,7 +563,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 384
+  view: {fileID: -3105620587026806276}
   playerName: 
+  cam: {fileID: 1309978378914122905}
   speed: 10
   jumpHeight: 2.5
   mouseSensitivity: 300
@@ -613,15 +616,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620df2904fa052841a17c1a4344ed9e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentsToDisable:
+  otherComponentsToDisable:
   - {fileID: 3879707852286679232}
   - {fileID: 1309978378914122905}
   - {fileID: 1309978378914122906}
+  selfComponentsToDisable:
+  - {fileID: 7102149992244337902}
   playerRenderers:
     eyeL_Renderer: {fileID: 3879707851620878893}
     eyeR_Renderer: {fileID: 3879707852205942262}
     head_Renderer: {fileID: 3879707850570867324}
     body_Renderer: {fileID: 3879707852238191446}
+  view: {fileID: -3105620587026806276}
+--- !u!114 &3030820069542484579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3879707852286679236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 691037f489d1acc40812097772b13481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyTransform: {fileID: 3879707852286679233}
+  headTransform: {fileID: 3879707852205942264}
+  view: {fileID: -3105620587026806276}
+  hudTransform: {fileID: 1126862889741135051}
 --- !u!114 &-3105620587026806276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,7 +662,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3030820069542484579}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -791,7 +814,7 @@ GameObject:
   - component: {fileID: 1237736073950971388}
   - component: {fileID: 6387471172855947238}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

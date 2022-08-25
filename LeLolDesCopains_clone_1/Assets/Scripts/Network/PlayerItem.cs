@@ -46,10 +46,4 @@ public class PlayerItem : MonoBehaviour
         IsSet = false;
     }
 
-    private void Update()
-    {
-        if (itemRef != null)
-            Debug.Log(itemRef.NickName);
-    }
-
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerCharacter : Entity
 {
@@ -19,7 +20,11 @@ public class PlayerCharacter : Entity
 
     [SerializeField] private LayerMask groundMask;
 
+    [SerializeField] private PhotonView view;
+
     [SerializeField] private string playerName;
+
+    [SerializeField] private Camera cam;
     public string PlayerName { get => playerName; set => playerName = value; }
 
 
@@ -59,8 +64,8 @@ public class PlayerCharacter : Entity
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        UpdateColors();
 
+        GameManager.Instance.mainCamera = cam;
 
         IsInit = true;
     }
@@ -149,4 +154,5 @@ public class PlayerCharacter : Entity
         velocity.y += GameManager.Instance.Gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
 }

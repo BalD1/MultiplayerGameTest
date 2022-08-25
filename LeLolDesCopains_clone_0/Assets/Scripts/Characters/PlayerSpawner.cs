@@ -7,7 +7,7 @@ public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject player_PF;
     [SerializeField] private Transform spawnPointsParent;
-    private Transform[] spawnPoints;
+    private Transform[] spawnPoints = new Transform[0];
 
     private void Start()
     {

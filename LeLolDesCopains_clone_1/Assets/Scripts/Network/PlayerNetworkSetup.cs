@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerNetworkSetup : MonoBehaviour
 {
-    [SerializeField] private Behaviour[] componentsToDisable;
+    [SerializeField] private Behaviour[] otherComponentsToDisable;
+    [SerializeField] private Behaviour[] selfComponentsToDisable;
     [SerializeField] private Renderers playerRenderers;
+    [SerializeField] private PhotonView view;
 
     [System.Serializable]
     public struct Renderers
@@ -18,14 +21,16 @@ public class PlayerNetworkSetup : MonoBehaviour
 
     private void Start()
     {
-        // Disable the components in array if this is not the local player, or hide self
-        // if (!this.isLocalPlayer) foreach (var component in componentsToDisable) { component.enabled = false; }
-        // else InitiateLocalPlayer();
+        if (!view.IsMine)
+            InitiateOtherPlayer();
+        else
+            InitiateLocalPlayer();
     }
 
     private void InitiateLocalPlayer()
     {
-        Camera.main.gameObject.SetActive(false);
+        foreach (Behaviour item in selfComponentsToDisable)
+            item.enabled = false;
 
         // Hide self components
         playerRenderers.eyeL_Renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
@@ -34,9 +39,9 @@ public class PlayerNetworkSetup : MonoBehaviour
         playerRenderers.body_Renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
     }
 
-    private void OnDisable()
+    private void InitiateOtherPlayer()
     {
-        if (Camera.main)
-            Camera.main.gameObject.SetActive(true);
+        foreach (Behaviour item in otherComponentsToDisable)
+            item.enabled = false;
     }
 }
