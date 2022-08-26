@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    /*
-     * 
-     * TODO : régler bug instantiation
-     * 
-     */
     private static GameManager instance;
     public static GameManager Instance
     {
@@ -25,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         MainMenu,
         InGame,
+        Pause,
     }
 
     private E_GameStates gameState;
@@ -39,6 +36,9 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case E_GameStates.InGame:
+                    break;
+
+                case E_GameStates.Pause:
                     break;
             }
 
@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private LobbyManager lobbyManager;
     public LobbyManager LobbyManagerRef { get => lobbyManager; }
+
+    public PlayerCharacter currentPlayerOwner;
 
     public Camera mainCamera;
 
@@ -87,8 +89,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HandlePause()
+    {
+        if (GameState == E_GameStates.InGame)
+            GameState = E_GameStates.Pause;
+        else
+            GameState = E_GameStates.InGame;
+    }
+
     private void Awake()
     {
         if (instance == null) instance = this;
+
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
+            GameState = E_GameStates.InGame;
     }
 }

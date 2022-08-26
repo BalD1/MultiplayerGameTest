@@ -25,6 +25,12 @@ public class PlayerCharacter : Entity
     [SerializeField] private string playerName;
 
     [SerializeField] private Camera cam;
+
+    [SerializeField] private Transform grabbableAnchor;
+    public Transform GrabbableAnchor { get => grabbableAnchor; }
+
+    private GameObject activeInteractable;
+
     public string PlayerName { get => playerName; set => playerName = value; }
 
 
@@ -65,6 +71,7 @@ public class PlayerCharacter : Entity
     {
         Cursor.lockState = CursorLockMode.Locked;
 
+        GameManager.Instance.currentPlayerOwner = this;
         GameManager.Instance.mainCamera = cam;
 
         IsInit = true;
@@ -72,46 +79,19 @@ public class PlayerCharacter : Entity
 
     private void Update()
     {
-        CharacterMovements();
-        CameraUpdate();
-        JumpBehaviour();
-    }
-
-    public void UpdateColors()
-    {
-        if (playerColor != null)
-            return;
-
-        ColorPlayer colors = GameManager.Instance.PickedPlayerColors;
-        if (colors == null || colors.PlayerParts == null)
-            return;
-
-        playerColor ??= new Dictionary<PlayerColorableParts, Color>();
-
-        for (int i = 0; i < colors.PlayerParts.Count; i++)
+        if (GameManager.Instance.GameState == GameManager.E_GameStates.InGame)
         {
-            Color c = colors.PlayerParts[i].color;
-            playerColor.Add(colors.PlayerPartName[i], c);
-
-            switch (colors.PlayerPartName[i])
-            {
-                case PlayerColorableParts.EyeL:
-                    eyeL.GetComponent<MeshRenderer>().material.color = c;
-                    break;
-
-                case PlayerColorableParts.EyeR:
-                    eyeR.GetComponent<MeshRenderer>().material.color = c;
-                    break;
-
-                case PlayerColorableParts.Head:
-                    head.GetComponent<MeshRenderer>().material.color = c;
-                    break;
-
-                case PlayerColorableParts.Body:
-                    body.GetComponent<MeshRenderer>().material.color = c;
-                    break;
-            }
+            CharacterMovements();
+            CameraUpdate();
         }
+        JumpBehaviour();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            GameManager.Instance.HandlePause();
+
+        if (Input.GetMouseButtonDown(0))
+            SearchForGrabbable();
+
     }
 
     private void CameraUpdate()
@@ -136,13 +116,11 @@ public class PlayerCharacter : Entity
         movement = transform.right * movementAxis.x + transform.forward * movementAxis.y;
 
         controller.Move(movement * speed * Time.deltaTime);
-
-
     }
 
     private void JumpBehaviour()
     {
-        if (isGrounded)
+        if (isGrounded && GameManager.Instance.GameState == GameManager.E_GameStates.InGame)
         {
             if (Input.GetButtonDown("Jump"))
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * GameManager.Instance.Gravity);
@@ -153,6 +131,25 @@ public class PlayerCharacter : Entity
 
         velocity.y += GameManager.Instance.Gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void SearchForGrabbable()
+    {
+        if (activeInteractable != null)
+        {
+            activeInteractable = activeInteractable.GetComponent<Iinteractable>().Interact(this.gameObject);
+            return;
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, ~LayerMask.NameToLayer("Player")))
+        {
+            Iinteractable interactable = hit.collider.GetComponent<Iinteractable>();
+            if (interactable != null)
+            {
+                activeInteractable = interactable.Interact(this.gameObject);
+            }
+        }
     }
 
 }

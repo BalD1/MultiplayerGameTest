@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject mainMenu;
 
+    [SerializeField] private GameObject pauseMenu;
+
     private static UIManager Create()
     {
         GameObject uiManager = new GameObject();
@@ -70,6 +72,13 @@ public class UIManager : MonoBehaviour
 
             case GameManager.E_GameStates.InGame:
                 mainMenu.SetActive(false);
+                pauseMenu.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+
+            case GameManager.E_GameStates.Pause:
+                pauseMenu.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
                 break;
         }
     }
