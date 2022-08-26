@@ -42,7 +42,8 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            UIManager.Instance.WindowsManager(value);
+            if (UIManager.Instance != null)
+                UIManager.Instance.WindowsManager(value);
 
             gameState = value;
         }

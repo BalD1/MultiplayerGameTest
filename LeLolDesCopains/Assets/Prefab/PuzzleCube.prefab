@@ -149,8 +149,8 @@ MonoBehaviour:
   physicsCollider: {fileID: 4733685282849751341}
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.05
-  distanceBeforeAttach: 3
   activeEnteredColliders: []
+  currentPlate: {fileID: 0}
 --- !u!114 &1254922441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5683624210124640114}
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!65 &4733685282849751341

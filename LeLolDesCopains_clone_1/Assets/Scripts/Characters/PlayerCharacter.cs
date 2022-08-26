@@ -27,6 +27,8 @@ public class PlayerCharacter : Entity
     [SerializeField] private Camera cam;
 
     [SerializeField] private Transform grabbableAnchor;
+
+    [SerializeField] private float interactDistance = 20f;
     public Transform GrabbableAnchor { get => grabbableAnchor; }
 
     private GameObject activeInteractable;
@@ -142,7 +144,7 @@ public class PlayerCharacter : Entity
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, ~LayerMask.NameToLayer("Player")))
+        if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, interactDistance, ~LayerMask.NameToLayer("Player")))
         {
             Iinteractable interactable = hit.collider.GetComponent<Iinteractable>();
             if (interactable != null)

@@ -11,10 +11,7 @@ public class UIManager : MonoBehaviour
         get
         {
             if (!instance)
-            {
-                Debug.LogError("UIManager instance was not found, force creation");
-                Create();
-            }
+                Debug.LogError("UIManager instance was not found.");
 
             return instance;
         }
@@ -37,7 +34,9 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        instance ??= this;
+        if (instance == null) instance = this;
+
+        WindowsManager(GameManager.Instance.GameState);
     }
 
     public void OnClickedButton(string name)
@@ -68,10 +67,10 @@ public class UIManager : MonoBehaviour
         {
             case GameManager.E_GameStates.MainMenu:
                 mainMenu.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
                 break;
 
             case GameManager.E_GameStates.InGame:
-                mainMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 break;
