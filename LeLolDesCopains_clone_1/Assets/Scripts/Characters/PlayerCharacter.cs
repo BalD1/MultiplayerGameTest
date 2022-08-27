@@ -29,9 +29,10 @@ public class PlayerCharacter : Entity
     [SerializeField] private Transform grabbableAnchor;
 
     [SerializeField] private float interactDistance = 20f;
+    public float InteractDistance { get => interactDistance; }
     public Transform GrabbableAnchor { get => grabbableAnchor; }
 
-    private GameObject activeInteractable;
+    public GameObject activeInteractable;
 
     public string PlayerName { get => playerName; set => playerName = value; }
 
@@ -69,7 +70,7 @@ public class PlayerCharacter : Entity
 
     private bool isGrounded;
 
-    private void Start()
+    private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
 

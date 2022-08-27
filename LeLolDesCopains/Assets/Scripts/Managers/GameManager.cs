@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
@@ -97,5 +98,9 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
 
+#if UNITY_EDITOR
+        if (SceneManager.GetActiveScene().name.Equals("TestScene"))
+            PhotonNetwork.OfflineMode = true;
+#endif
     }
 }

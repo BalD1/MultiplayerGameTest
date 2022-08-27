@@ -568,7 +568,7 @@ MonoBehaviour:
   playerName: 
   cam: {fileID: 1309978378914122905}
   grabbableAnchor: {fileID: 6279158273888408752}
-  interactDistance: 20
+  interactDistance: 5
   speed: 10
   jumpHeight: 2.5
   mouseSensitivity: 300
