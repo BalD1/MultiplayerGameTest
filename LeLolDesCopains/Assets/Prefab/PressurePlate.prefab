@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 1607334136}
+  colorableMesh: {fileID: 1607334138}
   target: {fileID: 1973404947898611776}
   activableTarget: {fileID: 0}
-  interactor: {fileID: 0}
 --- !u!65 &1973404947069769119
 BoxCollider:
   m_ObjectHideFlags: 0

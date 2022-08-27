@@ -51,5 +51,6 @@ public class IGRoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Instantiate("PlayerManager", Vector3.zero, Quaternion.identity);
         }
+
     }
 }

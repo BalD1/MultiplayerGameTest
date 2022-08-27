@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : MonoBehaviour, IColorable
 {
     [SerializeField] private GameObject mesh;
+
+    [SerializeField] private MeshRenderer colorableMesh;
 
     [SerializeField] private Transform target;
     private Vector3 baseLocalPos;
@@ -12,13 +14,14 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private GameObject activableTarget;
     private Iinteractable interactableTarget;
 
-    [SerializeField] private GameObject interactor;
+    private GameObject interactor;
 
     private void Awake()
     {
         baseLocalPos = mesh.transform.localPosition;
         if (activableTarget != null)
             interactableTarget = activableTarget.GetComponent<Iinteractable>();
+
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -67,4 +70,8 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    public void ColorObject(Color _color)
+    {
+        colorableMesh.material.color = _color;
+    }
 }
