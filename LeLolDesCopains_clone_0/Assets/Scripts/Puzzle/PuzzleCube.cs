@@ -16,10 +16,14 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
 
     [SerializeField] private List<Collider> activeEnteredColliders = new List<Collider>();
 
-    private Vector3 currentEndPosition;
-    private Vector3 updatedEndPosition;
+    [SerializeField] private PuzzleCubeNetwork selfNetwork;
 
     private bool isGrabbed = false;
+    private bool isGrabbedByOther = false;
+
+    public bool IsGrabbed { get => isGrabbed; }
+    public bool IsGrabbedByOther { get => isGrabbedByOther; }
+
     private bool canUngrab = true;
 
     public PressurePlate currentPlate;
@@ -28,46 +32,79 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
 
     public GameObject Interact(GameObject sender)
     {
+        if (isGrabbedByOther) return null;
 
         if (!isGrabbed)
         {
             playerOwner = sender.GetComponent<PlayerCharacter>();
             this.transform.localEulerAngles = Vector3.zero;
-            currentEndPosition = updatedEndPosition = playerOwner.GrabbableAnchor.position;
 
-            body.useGravity = false;
-            physicsCollider.enabled = false;
-
-            body.isKinematic = true;
             isGrabbed = true;
 
-            if (currentPlate != null)
-            {
-                currentPlate.OnInteract(null);
-                currentPlate = null;
-            }
+            SetBody(IsGrabbed);
+
+            ResetCurrentPlate();
+
+            selfNetwork.ChangeGrabState(this.IsGrabbed);
         }
         else if (isGrabbed && canUngrab)
         {
             playerOwner = null;
 
-            body.useGravity = true;
-            physicsCollider.enabled = true;
-
-            body.isKinematic = false;
             isGrabbed = false;
 
+            SetBody(IsGrabbed);
+
             body.velocity = Vector3.zero;
+
+            selfNetwork.ChangeGrabState(this.IsGrabbed);
 
             return null;
         }
 
         return this.gameObject;
+    }
 
+    public void OnGrabByOther(bool state)
+    {
+        isGrabbedByOther = state;
+        SetBody(isGrabbedByOther);
+
+        if (!isGrabbedByOther)
+            ResetCurrentPlate();
+    }
+
+    private void SetBody(bool _isGrabbed)
+    {
+        if (_isGrabbed)
+        {
+            body.useGravity = false;
+            physicsCollider.enabled = false;
+
+            body.isKinematic = true;
+        }
+        else
+        {
+            body.useGravity = true;
+            physicsCollider.enabled = true;
+
+            body.isKinematic = false;
+        }
+    }
+
+    private void ResetCurrentPlate()
+    {
+        if (currentPlate != null)
+        {
+            currentPlate.OnInteract(null);
+            currentPlate = null;
+        }
     }
 
     private void FixedUpdate()
     {
+        if (isGrabbedByOther) return;
+
         if (isGrabbed)
         {
             Vector3 velocity = body.velocity;
@@ -78,6 +115,8 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
 
     private void LateUpdate()
     {
+        if (isGrabbedByOther) return;
+
         if (isGrabbed)
         {
             this.transform.eulerAngles = new Vector3
@@ -91,6 +130,8 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isGrabbedByOther) return;
+
         if (isGrabbed)
         {
             activeEnteredColliders.Add(other);
@@ -100,6 +141,8 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
 
     private void OnTriggerExit(Collider other)
     {
+        if (isGrabbedByOther) return;
+
         if (isGrabbed)
         {
             activeEnteredColliders.Remove(other);

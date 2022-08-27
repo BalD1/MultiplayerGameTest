@@ -2058,10 +2058,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1973404947069769117, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
-      propertyPath: activableTarget
-      value: 
-      objectReference: {fileID: 1849657617}
     - target: {fileID: 1973404948201145502, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
       propertyPath: m_Name
       value: PressurePlate
@@ -2110,6 +2106,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8421625891101736521, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
+      propertyPath: activableTarget
+      value: 
+      objectReference: {fileID: 1849657617}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
 --- !u!224 &2775703035924637783

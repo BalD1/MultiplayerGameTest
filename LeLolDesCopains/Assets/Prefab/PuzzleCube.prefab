@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7904743908856118789}
   - component: {fileID: 7904743908856118790}
   - component: {fileID: 7904743908856118791}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,11 +106,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7904743909168362242}
   - component: {fileID: 7904743909168362241}
+  - component: {fileID: 7923829558937985559}
   - component: {fileID: 1254922441}
   - component: {fileID: 4733685282849751341}
   - component: {fileID: 6702129859014884564}
   - component: {fileID: 5683624210124640114}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PuzzleCube
   m_TagString: PuzzleCube
   m_Icon: {fileID: 0}
@@ -150,7 +151,21 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.05
   activeEnteredColliders: []
+  selfNetwork: {fileID: 7923829558937985559}
   currentPlate: {fileID: 0}
+--- !u!114 &7923829558937985559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904743909168362243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028740705688b3f4d826a584f1254286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerScript: {fileID: 7904743909168362241}
 --- !u!114 &1254922441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +182,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5683624210124640114}

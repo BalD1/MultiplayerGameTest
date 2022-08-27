@@ -28,9 +28,12 @@ public class PressurePlate : MonoBehaviour
         PuzzleCube cube = collision.gameObject.GetComponent<PuzzleCube>();
         if (cube != null)
         {
-            OnInteract(collision.gameObject);
-            cube.currentPlate = this;
-            return;
+            if (!cube.IsGrabbed && !cube.IsGrabbedByOther)
+            {
+                OnInteract(collision.gameObject);
+                cube.currentPlate = this;
+                return;
+            }
         }
 
         PlayerCharacter character = collision.gameObject.GetComponentInParent<PlayerCharacter>();

@@ -35,8 +35,10 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-
-        WindowsManager(GameManager.Instance.GameState);
+    }
+    private void Start()
+    {
+        GameManager.Instance.OnUIManagerCreated();
     }
 
     public void OnClickedButton(string name)

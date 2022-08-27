@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (!instance) Debug.LogError("GameManager Instance was not found, force creation");
+            if (!instance) Debug.LogError("GameManager Instance was not found.");
 
             return instance;
         }
@@ -42,8 +42,7 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            if (UIManager.Instance != null)
-                UIManager.Instance.WindowsManager(value);
+            UIManager.Instance.WindowsManager(value);
 
             gameState = value;
         }
@@ -65,15 +64,11 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
 
-    private static GameManager Create()
+    public void OnUIManagerCreated()
     {
-        GameObject gameManager = new GameObject();
-        gameManager.name = "GameManager";
 
-        gameManager.AddComponent<GameManager>();
-        instance = gameManager.GetComponent<GameManager>();
-
-        return gameManager.GetComponent<GameManager>();
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
+            GameState = E_GameStates.InGame;
     }
 
     public void StartGame(bool isHost)
@@ -102,7 +97,5 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
 
-        if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
-            GameState = E_GameStates.InGame;
     }
 }

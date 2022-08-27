@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973404947069769114}
-  - component: {fileID: 1973404947069769117}
+  - component: {fileID: 8421625891101736521}
   - component: {fileID: 1973404947069769119}
   m_Layer: 0
   m_Name: InteractablePart
@@ -115,7 +115,7 @@ Transform:
   m_Father: {fileID: 1973404948201145506}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1973404947069769117
+--- !u!114 &8421625891101736521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,6 +130,7 @@ MonoBehaviour:
   mesh: {fileID: 1607334136}
   target: {fileID: 1973404947898611776}
   activableTarget: {fileID: 0}
+  interactor: {fileID: 0}
 --- !u!65 &1973404947069769119
 BoxCollider:
   m_ObjectHideFlags: 0

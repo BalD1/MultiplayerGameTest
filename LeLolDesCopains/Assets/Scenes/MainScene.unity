@@ -1279,22 +1279,22 @@ PrefabInstance:
     - target: {fileID: 7904743909168362241, guid: cdd41e4d41ced1f4cb76be1f673b5d1a, type: 3}
       propertyPath: currentPlate
       value: 
-      objectReference: {fileID: 1424116577}
+      objectReference: {fileID: 0}
     - target: {fileID: 7904743909168362242, guid: cdd41e4d41ced1f4cb76be1f673b5d1a, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7904743909168362242, guid: cdd41e4d41ced1f4cb76be1f673b5d1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.89
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 7904743909168362242, guid: cdd41e4d41ced1f4cb76be1f673b5d1a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7904743909168362242, guid: cdd41e4d41ced1f4cb76be1f673b5d1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.307551
+      value: 6.12
       objectReference: {fileID: 0}
     - target: {fileID: 7904743909168362242, guid: cdd41e4d41ced1f4cb76be1f673b5d1a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1786,19 +1786,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8421625891101736521, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
+      propertyPath: activableTarget
+      value: 
+      objectReference: {fileID: 728295133}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
---- !u!114 &1424116577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1973404947069769117, guid: e12e5f9dba6fa434f93cc38271b73560, type: 3}
-  m_PrefabInstance: {fileID: 1424116576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a1c6fddcdca834b99ef8f16fbe84e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1541692930
 GameObject:
   m_ObjectHideFlags: 0
