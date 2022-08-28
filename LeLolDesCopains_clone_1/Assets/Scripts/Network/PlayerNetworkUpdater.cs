@@ -24,7 +24,7 @@ public class PlayerNetworkUpdater : MonoBehaviour, IPunObservable
         else
         {
             SmoothTransform();
-            hudTransform.LookAt(GameManager.Instance.mainCamera.transform);
+            hudTransform.LookAt(GameManager.Instance.currentPlayerOwner.transform);
         }
     }
 

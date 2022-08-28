@@ -11,16 +11,23 @@ public class PressurePlate : MonoBehaviour, IColorable
     [SerializeField] private Transform target;
     private Vector3 baseLocalPos;
 
-    [SerializeField] private GameObject activableTarget;
-    private Iinteractable interactableTarget;
+    [SerializeField] private GameObject[] activableTargets;
+    private Iinteractable[] interactableTargets;
 
     private GameObject interactor;
 
     private void Awake()
     {
         baseLocalPos = mesh.transform.localPosition;
-        if (activableTarget != null)
-            interactableTarget = activableTarget.GetComponent<Iinteractable>();
+
+        interactableTargets = new Iinteractable[activableTargets.Length];
+        if (activableTargets != null)
+        {
+            for (int i = 0; i < activableTargets.Length; i++)
+            {
+                interactableTargets[i] = activableTargets[i].GetComponent<Iinteractable>();
+            }
+        }
 
     }
 
@@ -58,7 +65,10 @@ public class PressurePlate : MonoBehaviour, IColorable
     public void OnInteract(GameObject _interactor)
     {
         interactor = _interactor;
-        interactableTarget.Interact(this.gameObject);
+        foreach (var item in interactableTargets)
+        {
+            item.Interact(this.gameObject);
+        }
 
         if (_interactor == null)
         {

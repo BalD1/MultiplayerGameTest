@@ -1,6 +1,9 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace BalDUtilities
 {
@@ -133,6 +136,7 @@ namespace BalDUtilities
         }
     }
 
+#if UNITY_EDITOR
     namespace EditorUtils
     {
         public static class SimpleDraws
@@ -280,6 +284,7 @@ namespace BalDUtilities
             }
         }
     }
+#endif
 
     namespace Misc
     {

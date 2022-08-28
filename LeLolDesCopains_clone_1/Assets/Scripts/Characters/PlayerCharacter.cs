@@ -74,7 +74,9 @@ public class PlayerCharacter : Entity
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        GameManager.Instance.currentPlayerOwner = this;
+        if (view.IsMine)
+            GameManager.Instance.currentPlayerOwner = this;
+
         GameManager.Instance.mainCamera = cam;
 
         IsInit = true;

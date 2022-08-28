@@ -44,12 +44,18 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
 
     private void Start()
     {
-        playerClient = GameManager.Instance.currentPlayerOwner;
-
         baseOutlineValue = outline.OutlineWidth;
         outline.OutlineColor = canInteractColor;
 
         SetOutlineActive(false);
+
+        Invoke(nameof(DelayedStart), 1f);
+    }
+
+    private void DelayedStart()
+    {
+        playerClient = GameManager.Instance.currentPlayerOwner;
+        Debug.Log(playerClient);
     }
 
     public GameObject Interact(GameObject sender)
