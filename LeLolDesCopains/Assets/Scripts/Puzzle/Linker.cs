@@ -14,8 +14,9 @@ public class Linker : MonoBehaviour
         {
             ic = item.GetComponent<IColorable>();
             if (ic == null) ic = item.GetComponentInParent<IColorable>();
+            if (ic == null) item.GetComponent<MeshRenderer>().material.color = objectsColor;
+            else ic.ColorObject(objectsColor);
 
-            ic.ColorObject(objectsColor);
         }
     }
 }

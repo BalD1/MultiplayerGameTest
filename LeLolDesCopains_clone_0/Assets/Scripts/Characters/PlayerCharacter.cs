@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+#if UNITY_EDITOR
+using UnityEngine.SceneManagement;
+#endif
+
 public class PlayerCharacter : Entity
 {
     [Header("Components")]
@@ -72,6 +76,29 @@ public class PlayerCharacter : Entity
 
     private void Awake()
     {
+#if UNITY_EDITOR
+        if (SceneManager.GetActiveScene().name.Equals("TestScene"))
+        {
+            if (GameManager.Instance.currentPlayerOwner == null)
+            {
+                GameManager.Instance.currentPlayerOwner = this;
+                GameManager.Instance.mainCamera = cam;
+
+            }
+            else
+            {
+                GameManager.Instance.secondPlayerOwner = this;
+                GameManager.Instance.secondMainCam = cam;
+                this.enabled = false;
+                this.cam.gameObject.SetActive(false);
+            }
+
+            Cursor.lockState = CursorLockMode.Locked;
+            IsInit = true;
+
+            return;
+        }
+#endif
         Cursor.lockState = CursorLockMode.Locked;
 
         if (view.IsMine)
@@ -88,14 +115,16 @@ public class PlayerCharacter : Entity
         {
             CharacterMovements();
             CameraUpdate();
+
+            if (Input.GetMouseButtonDown(0))
+                SearchForGrabbable();
         }
+
         JumpBehaviour();
 
         if (Input.GetKeyDown(KeyCode.Escape))
             GameManager.Instance.HandlePause();
 
-        if (Input.GetMouseButtonDown(0))
-            SearchForGrabbable();
 
     }
 

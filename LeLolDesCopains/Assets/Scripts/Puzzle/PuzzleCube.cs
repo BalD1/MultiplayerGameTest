@@ -55,7 +55,6 @@ public class PuzzleCube : MonoBehaviour, Iinteractable
     private void DelayedStart()
     {
         playerClient = GameManager.Instance.currentPlayerOwner;
-        Debug.Log(playerClient);
     }
 
     public GameObject Interact(GameObject sender)

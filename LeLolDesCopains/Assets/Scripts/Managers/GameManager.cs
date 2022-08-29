@@ -63,6 +63,11 @@ public class GameManager : MonoBehaviour
 
     public PlayerCharacter currentPlayerOwner;
 
+#if UNITY_EDITOR
+    public PlayerCharacter secondPlayerOwner;
+    public Camera secondMainCam;
+#endif
+
     public Camera mainCamera;
 
     public void OnUIManagerCreated()
@@ -88,10 +93,33 @@ public class GameManager : MonoBehaviour
 
     public void HandlePause()
     {
+#if UNITY_EDITOR
+        if (SceneManager.GetActiveScene().name.Equals("TestScene"))
+        {
+            if (currentPlayerOwner.isActiveAndEnabled)
+            {
+                currentPlayerOwner.enabled = false;
+                mainCamera.gameObject.SetActive(false);
+                secondPlayerOwner.enabled = true;
+                secondMainCam.gameObject.SetActive(true);
+            }
+            else
+            {
+                currentPlayerOwner.enabled = true;
+                mainCamera.gameObject.SetActive(true);
+                secondPlayerOwner.enabled = false;
+                secondMainCam.gameObject.SetActive(false);
+            }
+            return;
+        }
+#endif
+
         if (GameState == E_GameStates.InGame)
             GameState = E_GameStates.Pause;
         else
             GameState = E_GameStates.InGame;
+
+
     }
 
     private void Awake()

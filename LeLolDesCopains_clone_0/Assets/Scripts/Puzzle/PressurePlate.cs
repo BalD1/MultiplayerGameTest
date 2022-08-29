@@ -14,6 +14,8 @@ public class PressurePlate : MonoBehaviour, IColorable
     [SerializeField] private GameObject[] activableTargets;
     private Iinteractable[] interactableTargets;
 
+    [SerializeField] private bool interactOnExit = true;
+
     private GameObject interactor;
 
     private void Awake()
@@ -58,7 +60,9 @@ public class PressurePlate : MonoBehaviour, IColorable
     {
         if (interactor != null && other.gameObject.Equals(interactor))
         {
-            OnInteract(null);
+            interactor = null;
+
+            if (interactOnExit) OnInteract(null);
         }
     }
 
