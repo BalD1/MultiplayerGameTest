@@ -64,7 +64,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294965247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   groundCheck: {fileID: 3879707850926707881}
   groundMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 2432
   view: {fileID: -3105620587026806276}
   playerName: 
   cam: {fileID: 1309978378914122905}
